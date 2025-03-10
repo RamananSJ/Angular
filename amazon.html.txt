@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #131921;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff9900;
+}
+
+.logo span {
+    color: white;
+}
+
+.location {
+    font-size: 14px;
+}
+
+.location a {
+    color: #00aaff;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 40%;
+}
+
+.search-category {
+    border: none;
+    padding: 10px;
+    background: #f3f3f3;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.search-button {
+    border: none;
+    background: #febd69;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.language img {
+    width: 20px;
+    vertical-align: middle;
+}
+
+.account, .orders, .cart {
+    font-size: 14px;
+    text-align: center;
+}
+
+.cart {
+    font-size: 18px;
+}
+
+/* Products Bar */
+.products-bar {
+    display: flex;
+    align-items: center;
+    background: #232f3e;
+    padding: 10px;
+}
+
+.products-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.menu-button {
+    background: none;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Slideshow */
+.slideshow {
+    position: relative;
+    background: #f3f3f3;
+    text-align: center;
+    padding: 20px;
+}
+
+.slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide img {
+    width: 300px;
+}
+
+.slide-text {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.slide-text h2 {
+    font-size: 24px;
+    color: black;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+</style>
+<body>
+
+    <!-- Header Bar -->
+    <header class="header">
+        <div class="logo">amazon<span>.in</span></div>
+        <div class="location">Delivering to Bengaluru 562130 <a href="#">Update location</a></div>
+        <div class="search-bar">
+            <select class="search-category">
+                <option>All</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon.in">
+            <button class="search-button">🔍</button>
+        </div>
+        <div class="language"><img src="india-flag.png" alt="India Flag"> EN ▼</div>
+        <div class="account">Hello, sign in <br> <span>Account & Lists ▼</span></div>
+        <div class="orders">Returns <br> <span>& Orders</span></div>
+        <div class="cart">🛒 Cart (0)</div>
+    </header>
+
+    <!-- Products Bar -->
+    <nav class="products-bar">
+        <button class="menu-button">☰ All</button>
+        <a href="#">MX Player</a>
+        <a href="#">Sell</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Mobiles</a>
+        <a href="#">Prime ▼</a>
+        <a href="#">Customer Service</a>
+        <a href="#">New Releases</a>
+        <a href="#">Electronics</a>
+        <a href="#">Fashion</a>
+        <a href="#">Amazon Pay</a>
+        <a href="#">Home & Kitchen</a>
+        <a href="#">Computers</a>
+    </nav>
+
+    <!-- Slideshow -->
+    <div class="slideshow">
+        <button class="prev">❮</button>
+        <div class="slide">
+            <img src="banner1.jpg" alt="Slide Image">
+            <div class="slide-text">
+                <h2>STARTING ₹99</h2>
+                <p>Budget store</p>
+                <p>TOP BRANDS | WIDE SELECTION</p>
+                <img src="bank-discount.png" alt="Bank Offers">
+            </div>
+        </div>
+        <button class="next">❯</button>
+    </div>
+
+</body>
+</html>
