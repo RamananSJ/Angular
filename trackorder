@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 30px auto;
+            position: relative;
+        }
+        
+        .progress-bar {
+            left: 0;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 5px;
+            background-color: orange;
+            transform: translateY(-50%);
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .step {
+            position: relative;
+            width: 20%;
+            text-align: center;
+            z-index: 2;
+            margin-top: 10px;
+        }
+        
+        .step .circle {
+            width: 25px;
+            height: 25px;
+            background-color: gray;
+            border: 3px solid white;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .step.completed .circle {
+            background-color: green;
+            border-color: green;
+        }
+
+        .step.current .circle {
+            background-color: orange;
+            border-color: orange;
+        }
+
+        /* Order Details */
+        .order-container {
+    display: flex;  
+    justify-content: space-between; /* Places order items and order info side by side */
+    align-items: flex-start;
+    gap: 30px; /* Space between sections */
+    width: 100%;
+    max-width: 1100px; /* Keeps it responsive */
+    margin: auto; /* Centers the container */
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Order items list */
+.order-items {
+    flex: 1; /* Takes equal space */
+    list-style: none;
+    padding: 0;
+}
+
+.order-items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+/* Order info section */
+.order-info {
+    flex: 1;
+    background-color: #222; /* Slightly different shade */
+    padding: 20px;
+    border-radius: 8px;
+}
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .cancel-btn, .details-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background-color: red;
+            color: white;
+        }
+
+        .details-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .status-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: orange;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Track the Delivery of Your Order</h2>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+
+        <div class="step">
+            <span class="circle"></span>
+            <p>Order Placed<br>19 Nov 2023</p>
+        </div>
+
+        <div class="step">
+            <span class="circle"></span>
+            <p>Payment Accepted<br>19 Nov 2023</p>
+        </div>
+
+        <div class="step">
+            <span class="circle"></span>
+            <p>Products Delivered to Courier<br>22 Nov 2023</p>
+        </div>
+
+        <div class="step">
+            <span class="circle"></span>
+            <p>Products in Warehouse<br>23 Nov 2023</p>
+        </div>
+
+        <div class="step">
+            <span class="circle"></span>
+            <p>In Delivery Progress</p>
+        </div>
+    </div>
+
+    <!-- Order Details Section -->
+    
+        <div class="order-header">
+            <h3>Track the delivery of order <a href="#">#957684673</a></h3>
+        </div>
+        <div class="order-container">
+        <ul class="order-items">
+            <li><span>Apple iMac 27" x1</span> <span>$1,499</span></li>
+            <li><span>Apple iPhone 14 x2</span> <span>$1,998</span></li>
+            <li><span>Apple iPad Air x1</span> <span>$898</span></li>
+            <li><span>Xbox Series S x4</span> <span>$4,499</span></li>
+            <li><span>PlayStation 5 x1</span> <span>$499</span></li>
+            <li><span>MacBook Pro 16" x1</span> <span>$499</span></li>
+            <li><span>Apple Watch SE x2</span> <span>$799</span></li>
+        </ul>
+
+        <div class="order-info">
+            <p><strong>Order Date:</strong> 24 November 2023</p>
+            <p><strong>Email:</strong> name@example.com</p>
+            <p><strong>Phone:</strong> +123 456 7890</p>
+            <p><strong>Payment Method:</strong> 💳 Credit Card</p>
+            <p><strong>Shipping Address:</strong> 62 Miles Drive St, Newark, NJ 07103, California</p>
+            <p><strong>Total Price:</strong> $7,191.00</p>
+        </div>
+        </div>
+        <div class="buttons">
+            <button class="cancel-btn">Cancel the order</button>
+            <button class="details-btn">Order details</button>
+        </div>
+
+        <button class="status-btn" onclick="updateStatus()">Next Status</button>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll(".step");
+        const progressBar = document.getElementById("progress-bar");
+
+        function updateStatus() {
+            if (currentStep < steps.length) {
+                // Mark previous step as completed
+                if (currentStep > 0) {
+                    steps[currentStep - 1].classList.add("completed");
+                }
+                
+                // Mark current step
+                steps[currentStep].classList.add("current");
+
+                // Update progress bar width
+                progressBar.style.width = ((currentStep + 1) / steps.length) * 100 + "%";
+
+                currentStep++;
+            } else {
+                alert("Order is already in final delivery stage.");
+            }
+        }
+
+        // Initialize the first step
+        updateStatus();
+    </script>
+
+</body>
+</html>
