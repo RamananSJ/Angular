@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="/app.js"></script>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        #main-content {
+            margin-top: 20px;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 5px 0;
+            display: inline-block;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+        .message.received {
+            background-color: #dff9fb;
+            color: #222;
+            align-self: flex-start;
+        }
+        .message.sent {
+            background-color: #4CAF50;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .message-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+        .message-container.sent {
+            justify-content: flex-end;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <h2 style="color: #ff0000">
+        Seems your browser doesn't support Javascript! WebSocket relies on Javascript being enabled. Please enable
+        Javascript and reload this page!
+    </h2>
+</noscript>
+
+<div id="main-content" class="container">
+    <div class="chat-container">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="connect">WebSocket connection:</label>
+                        <button id="connect" class="btn btn-custom" type="submit">Connect</button>
+                        <button id="disconnect" class="btn btn-danger" type="submit" disabled="disabled">Disconnect</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name...">
+                    </div>
+                    <button id="send" class="btn btn-custom" type="submit"><i class="fas fa-paper-plane"></i> Send</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="chat-box" id="conversation">
+            <div id="greetings"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#send").click(function (event) {
+            event.preventDefault();
+            var name = $("#name").val();
+            if (name.trim() === "") return;
+
+            var message = $("<div class='message-container sent'><div class='message sent'>" + name + "</div></div>");
+            $("#greetings").append(message);
+            $(".chat-box").scrollTop($(".chat-box")[0].scrollHeight);
+
+            $("#name").val(""); // Clear input
+        });
+    });
+</script>
+
+</body>
+</html>
