@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Control Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .dashboard-header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            font-size: 24px;
+        }
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        .control-panel, .vehicle-status, .coordinates-section, .grid-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .grid-coordinates-container {
+            display: flex;
+            gap: 20px;
+            grid-column: span 2;
+            justify-content: center;
+        }
+        .grid-container {
+            flex: 2;
+            padding: 20px;
+        }
+        .coordinates-section {
+            flex: 1;
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .start { background-color: green; color: white; }
+        .stop { background-color: red; color: white; }
+        .alert {
+            color: red;
+            font-weight: bold;
+        }
+        .hidden { display: none; }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>🚛 Truck Control Dashboard</h1>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="control-panel">
+            <button class="btn start" onclick="sendCommand('start')">Start</button>
+            <button class="btn stop" onclick="sendCommand('stop')">Stop</button>
+            <div class="movement-controls">
+                <button class="btn" onclick="sendCommand('up')">⬆</button>
+                <div>
+                    <button class="btn" onclick="sendCommand('left')">⬅</button>
+                    <button class="btn" onclick="sendCommand('right')">➡</button>
+                </div>
+                <button class="btn" onclick="sendCommand('down')">⬇</button>
+            </div>
+            <button class="btn" onclick="sendCommand('setTarget')">🎯 Set Target</button>
+            <button class="btn" onclick="sendCommand('displayObstacles')">🚧 Display Obstacles</button>
+            <button class="btn" onclick="toggleObstacleForm()">➕ Add Obstacles</button>
+        </section>
+        
+        <aside class="vehicle-status">
+            <h2>Vehicle Status</h2>
+            <p>Status: <span id="status">Idle</span></p>
+            <p>Current Position: X: <span id="truckX">0</span> Y: <span id="truckY">0</span></p>
+            <button class="btn" onclick="refreshStatus()">🔄 Refresh Status</button>
+            <div id="collisionMessage" class="alert hidden">⚠️ Collision Detected!</div>
+        </aside>
+
+        <div class="grid-coordinates-container">
+            <section class="grid-container">
+                <canvas id="miningArea" width="500" height="500"></canvas>
+            </section>
+
+            <section class="coordinates-section">
+                <h3>Received Coordinates</h3>
+                <ul id="coordinatesList"></ul>
+            </section>
+        </div>
+    </main>
+
+    <div id="obstacleForm" class="modal hidden">
+        <h3>Add an Obstacle</h3>
+        <form onsubmit="addObstacle(event)">
+            <label for="x">X Coordinate:</label>
+            <input type="number" id="x" required>
+            <label for="y">Y Coordinate:</label>
+            <input type="number" id="y" required>
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="toggleObstacleForm()">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>
